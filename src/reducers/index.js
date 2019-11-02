@@ -4,12 +4,15 @@ const initialState = {
   }],
   xIsNext: true,
   winner: null,
+  stepNumber: 0,
 }
 
 export default function gameReducer(state = initialState, action) {
   switch (action.type) {
     case 'SET_SQUARE_SYMBOL':
       return handleClick(state, action.i);
+    case 'JUMP_TO_MOVE':
+      return jumpTo(state, action.move);
     default:
       return state;
   }
@@ -36,15 +39,13 @@ function calculateWinner(squares) {
 }
 
 function handleClick(state, i){
-  const history = state.history.slice();
+  const history = state.history.slice(0, state.stepNumber + 1);
   const current = history[history.length-1];
   const squares = current.squares.slice();
   if (calculateWinner(squares) || squares[i]) {
     return (
       {
-        squares: squares,
-        xIsNext: state.xIsNext,
-        winner: calculateWinner(squares)
+        ...state
       }
     );
   }
@@ -53,7 +54,19 @@ function handleClick(state, i){
     {
       history: history.concat([{ squares: squares }]),
       xIsNext: !state.xIsNext,
-      winner: calculateWinner(squares)
+      winner: calculateWinner(squares),
+      stepNumber: history.length,
+    }
+  );
+}
+
+function jumpTo(state, move){
+  const history = state.history.slice(0, move + 1);
+  return (
+    {
+      ...state,
+      history: history,
+      stepNumber: move
     }
   );
 }

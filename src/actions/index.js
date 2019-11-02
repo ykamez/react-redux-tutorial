@@ -3,3 +3,7 @@ export const setSquare = i => ({
   i
 })
 
+export const backTo = move => ({
+  type: 'JUMP_TO_MOVE',
+  move
+})
