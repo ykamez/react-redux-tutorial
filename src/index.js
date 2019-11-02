@@ -3,11 +3,10 @@ import { render } from 'react-dom'
 // NOTE: ReduxでStoreへのContainerのアクセスを可能にしてくれて、propsのバケツリレーが不要になるやつ。
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-// TODO(ykamez): impl
-import ticTackToeApp from './reducers'
+import gameReducer from './reducers/index'
 import App from './components/App'
 
-const store = createStore(todoApp)
+const store = createStore(gameReducer)
 
 render(
   <Provider store={store}>
