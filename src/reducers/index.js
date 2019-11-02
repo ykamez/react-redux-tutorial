@@ -40,7 +40,7 @@ function handleClick(state, i){
       {
         squares: squares,
         xIsNext: state.xIsNext,
-        winner: state.xIsNext ? 'O' : 'X'
+        winner: calculateWinner(squares)
       }
     );
   }
@@ -49,6 +49,7 @@ function handleClick(state, i){
     {
       squares: squares,
       xIsNext: !state.xIsNext,
+      winner: calculateWinner(squares)
     }
   );
 }
