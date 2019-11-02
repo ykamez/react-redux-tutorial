@@ -1,9 +1,6 @@
-import { setSquare } from "../actions";
-
 const initialState = {
   squares: Array(9).fill(null),
   xIsNext: true,
-  stepNumber: 0,
   winner: null,
 }
 
@@ -37,29 +34,21 @@ function calculateWinner(squares) {
 }
 
 function handleClick(state, i){
-  const history = state.history.slice(0, state.stepNumber + 1);
-  const current = history[history.length - 1];
-  // NOTE: slice はコピーを作成する
-  // イミュータブル性を保つために、このようにしている
-  const squares = current.squares.slice();
+  const squares = state.squares.slice();
   if (calculateWinner(squares) || squares[i]) {
-    return;
+    return (
+      {
+        squares: squares,
+        xIsNext: state.xIsNext,
+        winner: state.xIsNext ? 'O' : 'X'
+      }
+    );
   }
   squares[i] = state.xIsNext ? 'X' : 'O';
   return (
     {
-      history: history.concat([{
-        squares: squares,
-      }]),
-      xIsNext: !this.state.xIsNext,
-      stepNumber: history.length,
+      squares: squares,
+      xIsNext: !state.xIsNext,
     }
   );
-}
-
-function jumpTo(step) {
-  return {
-    stepNumber: step,
-    xIsNext: (step%2) === 0,
-  };
 }
