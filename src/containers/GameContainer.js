@@ -1,15 +1,13 @@
 import { connect } from 'react-redux';
 import Game from '../components/Game';
-// TODO(ykamez): action を追加する
+import { handleClick, jumpTo } from '../actions';
 
 const mapStateToProps = state => { state }
-const mapDispatchToProps = dispatch => {
-  return {
-    onClick: i => {
-      dispatch(squareClick(i))
-    }
-  }
-}
+const mapDispatchToProps = dispatch =>({
+  handleClick: i => dispatch(handleClick(i)),
+  jumpTo: step => dispatch(jumpTo(step))
+})
+
 const GameContainer = connect(
   mapStateToProps,
   mapDispatchToProps
