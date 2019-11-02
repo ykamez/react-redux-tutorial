@@ -1,5 +1,6 @@
 import React from 'react'
 import { render } from 'react-dom'
+// NOTE: ReduxでStoreへのContainerのアクセスを可能にしてくれて、propsのバケツリレーが不要になるやつ。
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 // TODO(ykamez): impl
