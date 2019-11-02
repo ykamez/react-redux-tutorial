@@ -1,11 +1,17 @@
 import { connect } from 'react-redux';
 import Game from '../components/Game';
-import { handleClick, jumpTo } from '../actions';
+import { setSquare } from '../actions';
 
-const mapStateToProps = state => { state }
+const mapStateToProps = (state) => {
+  return {
+    squares: state.squares,
+    xIsNext: state.xIsNext,
+    winner: state.winner
+  };
+};
+
 const mapDispatchToProps = dispatch =>({
-  handleClick: i => dispatch(handleClick(i)),
-  jumpTo: step => dispatch(jumpTo(step))
+  handleClick: i => dispatch(setSquare(i))
 })
 
 const GameContainer = connect(

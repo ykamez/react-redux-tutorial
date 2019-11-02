@@ -1,24 +1,16 @@
-import { handleClick } from "../actions";
+import { setSquare } from "../actions";
 
 const initialState = {
-  history: [{
-    squares: Array(9).fill(null),
-  }],
+  squares: Array(9).fill(null),
   xIsNext: true,
   stepNumber: 0,
+  winner: null,
 }
 
 export default function gameReducer(state = initialState, action) {
   switch (action.type) {
     case 'SET_SQUARE_SYMBOL':
       return handleClick(state, action.i);
-    case 'JUMP_TO_STEP':
-      return (
-        {
-          squares: state.squares,
-          jumpTo(action.step)
-        }
-      );
     default:
       return state;
   }
