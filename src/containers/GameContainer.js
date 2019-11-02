@@ -4,7 +4,7 @@ import { setSquare } from '../actions';
 
 const mapStateToProps = (state) => {
   return {
-    squares: state.squares,
+    squares: state.history[state.history.length - 1].squares,
     xIsNext: state.xIsNext,
     winner: state.winner
   };

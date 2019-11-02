@@ -1,5 +1,7 @@
 const initialState = {
-  squares: Array(9).fill(null),
+  history: [{
+    squares: Array(9).fill(null),
+  }],
   xIsNext: true,
   winner: null,
 }
@@ -34,7 +36,9 @@ function calculateWinner(squares) {
 }
 
 function handleClick(state, i){
-  const squares = state.squares.slice();
+  const history = state.history.slice();
+  const current = history[history.length-1];
+  const squares = current.squares.slice();
   if (calculateWinner(squares) || squares[i]) {
     return (
       {
@@ -47,7 +51,7 @@ function handleClick(state, i){
   squares[i] = state.xIsNext ? 'X' : 'O';
   return (
     {
-      squares: squares,
+      history: history.concat([{ squares: squares }]),
       xIsNext: !state.xIsNext,
       winner: calculateWinner(squares)
     }
